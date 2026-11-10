@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>秋招简历助手 · 设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <header class="top">
+      <img src="../../icons/icon48.png" alt="" />
+      <div>
+        <h1>秋招简历助手</h1>
+        <p>资料、附件和填写记录都只保存在这台电脑的浏览器里。只有你主动使用 AI 功能时，简历正文才会发给你配置的 AI 服务。</p>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="profile" class="on">我的资料</button>
+      <button data-tab="jobs">岗位定制 <span id="jobCount" class="badge"></span></button>
+      <button data-tab="files">附件 <span id="fileCount" class="badge"></span></button>
+      <button data-tab="memory">填写记录 <span id="memCount" class="badge"></span></button>
+      <button data-tab="settings">设置</button>
+    </nav>
+
+    <main>
+      <!-- ───────── 我的资料 ───────── -->
+      <section id="tab-profile">
+        <div class="bar">
+          <p class="hint">插件只会填这里有的内容，这里没有的一律留空让你补。左边中文、右边英文，分别用于中文和英文表单。</p>
+          <div class="grow"></div>
+          <button id="fillEnglish" title="把只有中文（或只有英文）的字段翻译补齐。翻译结果先显示出来，你核对后再保存">AI 补齐缺的英文 / 中文</button>
+          <button id="reseed">从 private/profile.json 重新导入</button>
+          <button id="saveProfile" class="primary">保存资料</button>
+        </div>
+        <div id="aiNotice" class="warn" hidden></div>
+        <div id="profileMissing" class="warn" hidden>
+          还没有资料。直接在下面填写后点「保存资料」即可；也可以把 <code>examples/profile.example.json</code> 复制为 <code>private/profile.json</code>，改成你自己的信息后点「从 private/profile.json 重新导入」。
+        </div>
+        <div id="profileForm"></div>
+      </section>
+
+      <!-- ───────── 岗位定制 ───────── -->
+      <section id="tab-jobs" hidden>
+        <div class="jobs">
+          <aside class="job-list">
+            <button id="newJob" class="primary">+ 新建岗位</button>
+            <div id="jobItems"></div>
+            <p class="hint">也可以在岗位详情页点插件图标 →「读取本页 JD」，自动建一个。</p>
+          </aside>
+          <div id="jobMain" class="job-main"></div>
+        </div>
+      </section>
+
+      <!-- ───────── 附件 ───────── -->
+      <section id="tab-files" hidden>
+        <div class="bar">
+          <p class="hint">选一个文件夹（比如桌面上的「秋招」），插件会认出里面哪些是简历、证件照、成绩单……导入后，网申页面要哪种文件就传哪种。认不准的会让你确认。</p>
+          <div class="grow"></div>
+          <label class="check"><input type="checkbox" id="deep" /> 包含子文件夹</label>
+          <button id="rescan" hidden>重新扫描</button>
+          <button id="pickFolder" class="primary">选择文件夹…</button>
+          <button id="addFiles">添加单个文件…</button>
+          <input id="addFilesInput" type="file" multiple hidden />
+          <input id="folderInput" type="file" webkitdirectory hidden />
+        </div>
+        <div id="scanBox" hidden></div>
+        <div id="fileList"></div>
+      </section>
+
+      <!-- ───────── 填写记录 ───────── -->
+      <section id="tab-memory" hidden>
+        <div class="bar">
+          <p class="hint">你在各个网站手动填过、改过的内容。下次遇到同名字段会自动填。填错了可以在这里改或删。</p>
+          <div class="grow"></div>
+          <input id="memSearch" type="search" placeholder="搜索字段或内容" />
+          <button id="memClear" class="danger">清空全部</button>
+        </div>
+        <table id="memTable">
+          <thead>
+            <tr><th>字段</th><th>记住的值</th><th>最近一次填写</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="memEmpty" class="empty" hidden>还没有记录。去招聘网站点「一键填写」，把提示的待补充项手动填一遍，这里就会出现。</p>
+      </section>
+
+      <!-- ───────── 设置 ───────── -->
+      <section id="tab-settings" hidden>
+        <h3>AI（可选）</h3>
+        <p class="hint">
+          用于「补齐英文」和「岗位定制」。默认使用 Google Gemini Flash-Lite 的免费额度，到
+          <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">aistudio.google.com/apikey</a> 免费申请一个 Key 粘贴到下面即可。不填也能用：每个 AI 功能都可以「复制提示词」到 ChatGPT 等网页版，再把回复贴回来。
+        </p>
+        <div class="warn">
+          <b>关于隐私：</b>发给 AI 的只有教育、实习、项目、技能这些简历正文和岗位 JD，<b>不包含</b>姓名、电话、邮箱、证件号和任何附件。Gemini 的免费层会把提交的内容用于改进 Google 的产品；介意的话请使用付费层，或者只用「复制提示词」的方式。API Key 只保存在本机浏览器里，不会进备份文件。
+        </div>
+        <div class="set">
+          <label for="ai-key">Gemini API Key</label>
+          <div class="inline">
+            <input type="password" id="ai-key" autocomplete="off" placeholder="粘贴你的 Key" />
+            <button id="ai-test">测试连接</button>
+          </div>
+        </div>
+        <div class="set">
+          <label for="ai-model">模型</label>
+          <input type="text" id="ai-model" placeholder="gemini-3.5-flash-lite" />
+        </div>
+        <div class="set">
+          <label><input type="checkbox" id="ai-grounding" /> 分析岗位时联网检索公司信息（Gemini 免费层不支持；开了也只在付费层生效）</label>
+        </div>
+        <details class="set">
+          <summary>高级</summary>
+          <label for="ai-base">接口地址（留空用官方地址；需要走代理或自建转发时才填）</label>
+          <input type="text" id="ai-base" placeholder="https://generativelanguage.googleapis.com" />
+        </details>
+        <p id="ai-status" class="hint"></p>
+
+        <h3>填写偏好</h3>
+        <div class="set">
+          <label>手机号 / 邮箱用哪一套</label>
+          <select id="s-contact">
+            <option value="auto">跟随表单语言（中文表单用左边一套，英文表单用右边一套）</option>
+            <option value="zh">始终用中文那一套</option>
+            <option value="en">始终用英文那一套</option>
+          </select>
+        </div>
+        <div class="set">
+          <label>填写语言</label>
+          <select id="s-lang">
+            <option value="auto">自动（按页面语言）</option>
+            <option value="zh">始终中文</option>
+            <option value="en">始终英文</option>
+          </select>
+        </div>
+        <div class="set">
+          <label>页面只有「工作经历」没有「实习经历」时</label>
+          <select id="s-internAsWork">
+            <option value="null">每次问我</option>
+            <option value="true">把实习填进「工作经历」</option>
+            <option value="false">不填</option>
+          </select>
+        </div>
+        <div class="set">
+          <label><input type="checkbox" id="s-autoUpload" /> 认得出类型、且只有一个（或设了默认）文件时，自动上传附件</label>
+        </div>
+        <div class="set">
+          <label><input type="checkbox" id="s-rememberSensitive" /> 记住身份证号、护照号这类字段（只存在本机）</label>
+        </div>
+
+        <h3>已启用的网站</h3>
+        <p class="hint">在这些网站上会显示右下角悬浮按钮，并记录你手动填写的内容。「定制」一栏是这个网站使用哪个岗位的定制内容。</p>
+        <div id="siteList"></div>
+
+        <h3>备份与恢复</h3>
+        <p class="hint">备份包含资料、填写记录、岗位定制和设置（不含 API Key 和附件文件）。里面有个人信息，请妥善保管，不要上传到 GitHub。</p>
+        <div class="bar">
+          <button id="export">导出备份（JSON）</button>
+          <button id="import">从备份恢复…</button>
+          <input id="importFile" type="file" accept=".json,application/json" hidden />
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" hidden></div>
+    <script src="../lib/text.js"></script>
+    <script src="../lib/store.js"></script>
+    <script src="../lib/files.js"></script>
+    <script src="../lib/ai.js"></script>
+    <script src="ui.js"></script>
+    <script src="profile.js"></script>
+    <script src="jobs.js"></script>
+    <script src="attachments.js"></script>
+    <script src="memory.js"></script>
+    <script src="settings.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

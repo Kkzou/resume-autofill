@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>模拟校招简历表单（测试用）</title>
+    <style>
+      body { font: 14px/1.6 -apple-system, "PingFang SC", sans-serif; margin: 0; background: #f5f6f8; color: #222; }
+      .side-nav { position: fixed; left: 0; top: 0; width: 150px; padding: 20px 12px; }
+      .side-nav a { display: block; padding: 4px 8px; color: #555; text-decoration: none; }
+      form { max-width: 760px; margin: 0 auto 80px 180px; padding: 10px 20px; }
+      section { background: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+      h3, .block-title { margin: 0 0 10px; font-size: 16px; font-weight: 600; }
+      .ant-form-item, .el-form-item, .row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+      .ant-form-item-label, .el-form-item__label, .lbl { width: 110px; text-align: right; color: #555; flex: none; }
+      .ant-form-item-required::before, .el-form-item.is-required > .el-form-item__label::before { content: "*"; color: #e11; margin-right: 3px; }
+      .ant-form-item-control, .el-form-item__content { flex: 1; display: flex; gap: 8px; align-items: center; }
+      input, textarea, select { padding: 6px 8px; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
+      input:not([type="radio"]):not([type="file"]), textarea { flex: 1; min-width: 0; }
+      textarea { width: 100%; min-height: 70px; }
+      .block { border: 1px dashed #ddd; border-radius: 8px; padding: 12px 12px 2px; margin-bottom: 10px; }
+      .ant-select, .el-select { position: relative; flex: 1; }
+      .ant-select-selector { border: 1px solid #ccc; border-radius: 6px; padding: 6px 8px; min-height: 34px; cursor: pointer; position: relative; background: #fff; }
+      .ant-select-selection-search { position: absolute; inset: 0; }
+      .ant-select-selection-search input { width: 100%; height: 100%; opacity: 0; border: 0; cursor: pointer; }
+      .ant-select-selection-placeholder { color: #bbb; }
+      .el-select .el-input { display: flex; }
+      .el-select .el-input__inner { cursor: pointer; }
+      .ant-select-dropdown, .el-select-dropdown { position: absolute; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); z-index: 100; min-width: 180px; max-height: 160px; overflow-y: auto; padding: 4px 0; margin: 0; list-style: none; }
+      .ant-select-item-option, .el-select-dropdown__item { padding: 6px 12px; cursor: pointer; }
+      .ant-select-item-option:hover, .el-select-dropdown__item:hover { background: #eef3ff; }
+      .ant-picker, .el-date-editor { flex: 1; display: flex; }
+      table { border-collapse: collapse; width: 100%; }
+      td { padding: 4px 6px; }
+      td:nth-child(odd) { width: 90px; text-align: right; color: #555; }
+      .upload-list { color: #059669; font-size: 13px; }
+      .saved-card { background: #f3f4f6; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; color: #444; }
+    </style>
+  </head>
+  <body>
+    <!-- 侧边导航里的「教育经历」等不应被当成分区标题 -->
+    <nav class="side-nav">
+      <a href="#basic">基本信息</a>
+      <a href="#edu">教育经历</a>
+      <a href="#intern">实习经历</a>
+      <a href="#family">家庭成员</a>
+    </nav>
+
+    <form id="f" onsubmit="return false">
+      <h1 style="font-size: 20px">某某公司 2027 校园招聘 · 在线简历</h1>
+
+      <section id="basic">
+        <h3 class="section-title">基本信息</h3>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="name" class="ant-form-item-required">姓名</label></div>
+          <div class="ant-form-item-control"><input id="name" class="ant-input" data-controlled /></div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label class="ant-form-item-required">性别</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-radio-group" id="gender">
+              <label class="ant-radio-wrapper"><input type="radio" name="gender" value="1" /><span>男</span></label>
+              <label class="ant-radio-wrapper"><input type="radio" name="gender" value="2" /><span>女</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label class="ant-form-item-required">手机号码</label></div>
+          <div class="ant-form-item-control">
+            <select id="code" style="width: 130px">
+              <option value="">请选择</option>
+              <option value="86">中国 +86</option>
+              <option value="886">中国台湾 +886</option>
+              <option value="852">中国香港 +852</option>
+              <option value="1">美国 +1</option>
+            </select>
+            <input id="phone" placeholder="请输入手机号" />
+          </div>
+        </div>
+
+        <div class="el-form-item is-required">
+          <label class="el-form-item__label">电子邮箱</label>
+          <div class="el-form-item__content">
+            <div class="el-input"><input class="el-input__inner" id="email" /></div>
+          </div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label class="ant-form-item-required">政治面貌</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-select" id="political" data-options="中共党员,中共预备党员,共青团员,群众,其他"></div>
+          </div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="birth" class="ant-form-item-required">出生日期</label></div>
+          <div class="ant-form-item-control"><input id="birth" type="date" /></div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="idno">身份证号</label></div>
+          <div class="ant-form-item-control"><input id="idno" /></div>
+        </div>
+
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="topdeg" class="ant-form-item-required">最高学历</label></div>
+          <div class="ant-form-item-control">
+            <select id="topdeg">
+              <option value="">请选择</option>
+              <option value="3">大专</option>
+              <option value="4">本科</option>
+              <option value="5">硕士研究生</option>
+              <option value="6">博士研究生</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 老式表格布局 -->
+        <table>
+          <tr>
+            <td>毕业院校</td>
+            <td><input id="topschool" /></td>
+            <td>届别</td>
+            <td>
+              <select id="gradyear">
+                <option>请选择</option>
+                <option>2026届</option>
+                <option>2027届</option>
+                <option>2028届</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>毕业时间</td>
+            <td><input id="topend" placeholder="YYYY-MM" /></td>
+            <td>微信号</td>
+            <td><input id="wechat" /></td>
+          </tr>
+        </table>
+
+        <!-- 只有 placeholder、没有标签的写法 -->
+        <div class="row"><input id="pinyin" placeholder="请输入姓名拼音" /><input id="hukou" placeholder="请输入户口所在地" /></div>
+
+        <!-- 不该碰的字段 -->
+        <div class="row"><span class="lbl">短信验证码</span><input id="sms" /></div>
+        <div class="row"><span class="lbl">设置密码</span><input id="pwd" type="password" /></div>
+      </section>
+
+      <section>
+        <h3 class="section-title">紧急联系人</h3>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="ecName">姓名</label></div>
+          <div class="ant-form-item-control"><input id="ecName" /></div>
+        </div>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="ecPhone">手机号码</label></div>
+          <div class="ant-form-item-control"><input id="ecPhone" /></div>
+        </div>
+      </section>
+
+      <section id="edu">
+        <h3 class="section-title">教育经历</h3>
+        <div id="eduBlocks"></div>
+        <button type="button" id="addEdu">+ 添加教育经历</button>
+      </section>
+
+      <section id="intern">
+        <h3 class="section-title">实习经历</h3>
+        <div id="internBlocks"></div>
+      </section>
+
+      <section>
+        <h3 class="section-title">项目经历</h3>
+        <div class="block">
+          <div class="el-form-item"><label class="el-form-item__label">项目名称</label><div class="el-form-item__content"><input id="pName" /></div></div>
+          <div class="el-form-item"><label class="el-form-item__label">担任角色</label><div class="el-form-item__content"><input id="pRole" /></div></div>
+          <div class="el-form-item"><label class="el-form-item__label">项目时间</label><div class="el-form-item__content"><input id="pTime" /></div></div>
+          <div class="el-form-item"><label class="el-form-item__label">项目描述</label><div class="el-form-item__content"><textarea id="pDesc" maxlength="2000"></textarea></div></div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="section-title">语言能力</h3>
+        <div class="el-form-item"><label class="el-form-item__label">语种</label><div class="el-form-item__content"><div class="el-select" id="lang" data-options="英语,日语,法语,德语"></div></div></div>
+        <div class="el-form-item"><label class="el-form-item__label">掌握程度</label><div class="el-form-item__content"><div class="el-select" id="langLevel" data-options="一般,良好,熟练,精通"></div></div></div>
+      </section>
+
+      <!-- 标题下面只有一个大文本框 -->
+      <section>
+        <div class="block-title">专业技能</div>
+        <textarea id="skills"></textarea>
+      </section>
+      <section>
+        <div class="block-title">自我评价</div>
+        <textarea id="self" placeholder="请输入内容，不超过 500 字"></textarea>
+      </section>
+
+      <section>
+        <h3 class="section-title">家庭成员</h3>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="famName">姓名</label></div>
+          <div class="ant-form-item-control"><input id="famName" /></div>
+        </div>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label for="famUnit">工作单位</label></div>
+          <div class="ant-form-item-control"><input id="famUnit" /></div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="section-title">附件</h3>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label class="ant-form-item-required">附件简历</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-upload"><input type="file" id="upResume" accept=".pdf,.doc,.docx" style="display: none" /><button type="button">点击上传</button></div>
+            <span class="upload-list" id="upResumeList"></span>
+          </div>
+        </div>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label>证件照</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-upload"><input type="file" id="upPhoto" accept="image/*" style="display: none" /><button type="button">点击上传</button></div>
+            <span class="upload-list" id="upPhotoList"></span>
+          </div>
+        </div>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label>个人照片</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-upload"><input type="file" id="upAny" accept="image/*" style="display: none" /><button type="button">点击上传</button></div>
+            <span class="upload-list" id="upAnyList"></span>
+          </div>
+        </div>
+        <div class="ant-form-item">
+          <div class="ant-form-item-label"><label>成绩单</label></div>
+          <div class="ant-form-item-control">
+            <div class="ant-upload"><input type="file" id="upPdfOnly" accept=".pdf" style="display: none" /><button type="button">点击上传</button></div>
+            <span class="upload-list" id="upPdfOnlyList"></span>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" id="submit">保存并下一步</button>
+    </form>
+
+    <script>
+      const params = new URLSearchParams(location.search);
+      const $ = (s, r = document) => r.querySelector(s);
+
+      // ── 模拟 antd Select：mousedown 打开，选项挂在 body 下，显示值在 span 里 ──
+      function antSelect(root) {
+        const options = root.dataset.options.split(',');
+        root.innerHTML =
+          '<div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" readonly role="combobox" autocomplete="off"></span><span class="ant-select-selection-placeholder">请选择</span></div>';
+        const selector = $('.ant-select-selector', root);
+        let drop = null;
+        const close = () => { drop?.remove(); drop = null; };
+        selector.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          if (drop) return close();
+          drop = document.createElement('div');
+          drop.className = 'ant-select-dropdown';
+          const r = selector.getBoundingClientRect();
+          drop.style.left = r.left + scrollX + 'px';
+          drop.style.top = r.bottom + scrollY + 2 + 'px';
+          for (const text of options) {
+            const o = document.createElement('div');
+            o.className = 'ant-select-item ant-select-item-option';
+            o.setAttribute('role', 'option');
+            o.textContent = text;
+            o.addEventListener('click', () => {
+              root.dataset.value = text;
+              $('.ant-select-selection-placeholder', root)?.remove();
+              let item = $('.ant-select-selection-item', root);
+              if (!item) selector.append((item = Object.assign(document.createElement('span'), { className: 'ant-select-selection-item' })));
+              item.textContent = text;
+              item.title = text;
+              close();
+            });
+            drop.append(o);
+          }
+          document.body.append(drop);
+        });
+        document.addEventListener('mousedown', (e) => { if (drop && !root.contains(e.target) && !drop.contains(e.target)) close(); });
+      }
+
+      // ── 模拟 Element UI Select：click 打开，显示值在只读 input 里 ──
+      function elSelect(root) {
+        const options = root.dataset.options.split(',');
+        root.innerHTML = '<div class="el-input"><input class="el-input__inner" readonly placeholder="请选择"></div>';
+        const input = $('input', root);
+        let drop = null;
+        const close = () => { drop?.remove(); drop = null; };
+        root.addEventListener('click', () => {
+          if (drop) return close();
+          drop = document.createElement('ul');
+          drop.className = 'el-select-dropdown el-select-dropdown__list';
+          const r = root.getBoundingClientRect();
+          drop.style.left = r.left + scrollX + 'px';
+          drop.style.top = r.bottom + scrollY + 2 + 'px';
+          for (const text of options) {
+            const o = document.createElement('li');
+            o.className = 'el-select-dropdown__item';
+            o.textContent = text;
+            o.addEventListener('click', (e) => { e.stopPropagation(); input.value = text; root.dataset.value = text; close(); });
+            drop.append(o);
+          }
+          document.body.append(drop);
+        });
+        document.addEventListener('click', (e) => { if (drop && !root.contains(e.target) && !drop.contains(e.target)) close(); });
+      }
+
+      // ── 模拟 antd 月份选择：可以输入 YYYY-MM 回车确认，输错了失焦会还原 ──
+      function monthPicker(input) {
+        let committed = '';
+        const commit = () => { if (/^\d{4}-\d{2}$/.test(input.value)) committed = input.value; };
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') commit(); });
+        input.addEventListener('blur', () => { input.value = committed; });
+        input.dataset.committed = '';
+        Object.defineProperty(input, '__committed', { get: () => committed });
+      }
+
+      // ── 模拟 React 受控输入框：没收到 input 事件的赋值会被打回 ──
+      function controlled(input) {
+        let state = input.value;
+        input.addEventListener('input', () => { state = input.value; });
+        setInterval(() => { if (input.value !== state) input.value = state; }, 30);
+      }
+
+      function eduBlock(i) {
+        const d = document.createElement('div');
+        d.className = 'block';
+        d.innerHTML = `
+          <div class="ant-form-item"><div class="ant-form-item-label"><label class="ant-form-item-required">学校名称</label></div><div class="ant-form-item-control"><input data-k="edu${i}.school"></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label class="ant-form-item-required">专业</label></div><div class="ant-form-item-control"><input data-k="edu${i}.major"></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label>辅修专业</label></div><div class="ant-form-item-control"><input data-k="edu${i}.minor"></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label class="ant-form-item-required">学历</label></div><div class="ant-form-item-control"><div class="ant-select" data-k="edu${i}.degree" data-options="高中,大专,本科,硕士研究生,博士研究生"></div></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label>学位</label></div><div class="ant-form-item-control"><select data-k="edu${i}.degreeName"><option value="">请选择</option><option>学士</option><option>硕士</option><option>博士</option></select></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label class="ant-form-item-required">在校时间</label></div><div class="ant-form-item-control"><input type="month" data-k="edu${i}.start"> 至 <input type="month" data-k="edu${i}.end"></div></div>
+          <div class="ant-form-item"><div class="ant-form-item-label"><label>GPA</label></div><div class="ant-form-item-control"><input data-k="edu${i}.gpa"></div></div>`;
+        d.querySelectorAll('.ant-select').forEach(antSelect);
+        return d;
+      }
+
+      function internBlock(i) {
+        const d = document.createElement('div');
+        d.className = 'block';
+        d.innerHTML = `
+          <div class="el-form-item is-required"><label class="el-form-item__label">公司名称</label><div class="el-form-item__content"><div class="el-input"><input class="el-input__inner" data-k="in${i}.company"></div></div></div>
+          <div class="el-form-item"><label class="el-form-item__label">所在部门</label><div class="el-form-item__content"><div class="el-input"><input class="el-input__inner" data-k="in${i}.dept"></div></div></div>
+          <div class="el-form-item is-required"><label class="el-form-item__label">职位名称</label><div class="el-form-item__content"><div class="el-input"><input class="el-input__inner" data-k="in${i}.title"></div></div></div>
+          <div class="el-form-item is-required"><label class="el-form-item__label">开始时间</label><div class="el-form-item__content"><div class="ant-picker"><div class="ant-picker-input"><input placeholder="请选择月份" data-k="in${i}.start" data-month></div></div></div></div>
+          <div class="el-form-item is-required"><label class="el-form-item__label">结束时间</label><div class="el-form-item__content"><div class="el-date-editor"><input class="el-input__inner" readonly placeholder="选择月" data-k="in${i}.end"></div></div></div>
+          <div class="el-form-item"><label class="el-form-item__label">工作地点</label><div class="el-form-item__content"><input data-k="in${i}.city"></div></div>
+          <div class="el-form-item is-required"><label class="el-form-item__label">工作描述</label><div class="el-form-item__content"><textarea maxlength="2000" data-k="in${i}.desc"></textarea></div></div>`;
+        d.querySelectorAll('[data-month]').forEach(monthPicker);
+        return d;
+      }
+
+      const eduCount = +(params.get('edu') || 2);
+      for (let i = 0; i < eduCount; i++) $('#eduBlocks').append(eduBlock(i));
+      $('#addEdu').addEventListener('click', () => $('#eduBlocks').append(eduBlock($('#eduBlocks').children.length)));
+      for (let i = 0; i < 2; i++) $('#internBlocks').append(internBlock(i));
+
+      document.querySelectorAll('.ant-select[id]').forEach(antSelect);
+      document.querySelectorAll('.el-select').forEach(elSelect);
+      document.querySelectorAll('[data-controlled]').forEach(controlled);
+
+      for (const id of ['upResume', 'upPhoto', 'upAny', 'upPdfOnly']) {
+        $('#' + id).addEventListener('change', (e) => {
+          $('#' + id + 'List').textContent = [...e.target.files].map((f) => `${f.name} (${f.size})`).join(', ');
+        });
+      }
+
+      // ?prefill=1：模拟「网站解析简历后预填了内容、但填得不对」
+      if (params.get('prefill')) {
+        $('#email').value = 'wrong@example.com';
+        $('#topschool').value = '错误大学';
+      }
+      // ?saved=<学校名>：模拟「这一段已经保存成只读卡片显示在页面上」
+      if (params.get('saved')) {
+        const card = document.createElement('div');
+        card.className = 'saved-card';
+        card.textContent = `${params.get('saved')} · 已保存`;
+        $('#eduBlocks').before(card);
+      }
+
+      // ?alias=1：模拟另一家网站对同一个字段用了不同的叫法
+      if (params.get('alias')) {
+        $('label[for="idno"]').textContent = '证件号码';
+        $('#wechat').closest('td').previousElementSibling.textContent = '微信';
+        $('#email').closest('.el-form-item').querySelector('label').textContent = 'E-mail';
+        $('#gender').closest('.ant-form-item').querySelector('label').textContent = '您的性别';
+        document.querySelectorAll('#gender span').forEach((sp) => (sp.textContent = sp.textContent === '男' ? '男性' : '女性'));
+      }
+
+      // 给测试脚本用：读出页面上所有字段当前的值
+      window.snapshot = () => {
+        const out = {};
+        document.querySelectorAll('input[id], textarea[id], select[id]').forEach((el) => {
+          if (el.type === 'radio') return;
+          out[el.id] = el.tagName === 'SELECT' ? el.selectedOptions[0]?.textContent.trim() || '' : el.type === 'file' ? [...el.files].map((f) => f.name).join(',') : el.value;
+        });
+        document.querySelectorAll('[data-k]').forEach((el) => {
+          out[el.dataset.k] = el.matches('.ant-select') ? el.dataset.value || '' : el.tagName === 'SELECT' ? (el.value ? el.selectedOptions[0].textContent.trim() : '') : el.value;
+        });
+        document.querySelectorAll('.ant-select[id], .el-select[id]').forEach((el) => (out[el.id] = el.dataset.value || ''));
+        out.gender = document.querySelector('input[name="gender"]:checked')?.nextElementSibling.textContent || '';
+        return out;
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "basic": {
+    "name": { "zh": "张三", "en": "San Zhang" },
+    "lastName": { "zh": "张", "en": "Zhang" },
+    "firstName": { "zh": "三", "en": "San" },
+    "pinyin": "Zhang San",
+    "phone": {
+      "zh": { "code": "+86", "number": "13800000000" },
+      "en": { "code": "+86", "number": "13800000000" }
+    },
+    "email": { "zh": "zhangsan@example.com", "en": "zhangsan@example.com" }
+  },
+  "education": [
+    {
+      "id": "edu1",
+      "school": { "zh": "示例大学", "en": "Example University" },
+      "major": { "zh": "计算机科学与技术", "en": "Computer Science" },
+      "minor": { "zh": null, "en": null },
+      "level": "master",
+      "degreeName": { "zh": "工学硕士", "en": "Master of Engineering" },
+      "start": "2024-09",
+      "end": "2027-06",
+      "city": { "zh": "北京", "en": "Beijing" },
+      "country": { "zh": "中国", "en": "China" }
+    }
+  ],
+  "internships": [
+    {
+      "id": "intern1",
+      "company": { "zh": "示例科技有限公司", "en": "Example Tech" },
+      "department": { "zh": "研发部", "en": "R&D" },
+      "title": { "zh": "后端开发实习生", "en": "Backend Intern" },
+      "type": { "zh": "实习", "en": "Internship" },
+      "city": { "zh": "上海", "en": "Shanghai" },
+      "start": "2026-06",
+      "end": "2026-09",
+      "desc": { "zh": "第一条工作内容。\n第二条工作内容。", "en": "First bullet.\nSecond bullet." }
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "name": { "zh": "示例项目", "en": "Example Project" },
+      "role": { "zh": "项目负责人", "en": "Project Lead" },
+      "start": "2025-03",
+      "end": "2025-06",
+      "desc": { "zh": "项目描述。", "en": "Project description." }
+    }
+  ],
+  "awards": [
+    { "id": "award1", "name": { "zh": "一等奖学金", "en": "First-class Scholarship" }, "issuer": { "zh": "示例大学", "en": "Example University" }, "date": "2025" }
+  ],
+  "languages": [{ "id": "english", "name": { "zh": "英语", "en": "English" } }],
+  "skills": { "zh": "Python、SQL、Excel", "en": "Python, SQL, Excel" },
+  "interests": { "zh": "跑步、阅读", "en": "Running, reading" },
+  "files": {
+    "resume_zh": { "path": "files/resume_zh.pdf", "name": "张三_简历.pdf", "type": "application/pdf" },
+    "resume_en": { "path": "files/resume_en.pdf", "name": "San_Zhang_CV.pdf", "type": "application/pdf" },
+    "photo_id": { "path": "files/photo_id.jpg", "name": "张三_证件照.jpg", "type": "image/jpeg" },
+    "photo_life": { "path": "files/photo_life.jpg", "name": "张三_生活照.jpg", "type": "image/jpeg" }
+  }
+}

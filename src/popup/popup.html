@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="../../icons/icon48.png" alt="" />
+      <div>
+        <b>秋招简历助手</b>
+        <small id="who">读取中…</small>
+      </div>
+    </header>
+    <button id="fill" class="primary">一键填写当前页面</button>
+    <button id="over">覆盖填写（用资料替换页面已有内容）</button>
+    <p id="status"></p>
+    <div class="job">
+      <label for="job">当前岗位（定制描述）</label>
+      <select id="job"></select>
+      <button id="capture" title="把这个页面的文字（或你选中的那一段）存成一个岗位，去设置页用 AI 分析和定制">读取本页 JD，去定制 →</button>
+    </div>
+    <label class="toggle"><input type="checkbox" id="site" /> 在这个网站显示右下角的悬浮按钮</label>
+    <footer>
+      <a id="opts" href="#">我的资料 · 填写记录 · 设置</a>
+      <span>快捷键 Option+Shift+F</span>
+    </footer>
+    <script src="popup.js"></script>
+  </body>
+</html>

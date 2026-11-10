@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "秋招简历助手",
+  "version": "1.1.0",
+  "description": "一键填写各公司校招网申表单：只填有把握的，不确定的留空提示，填过一次就记住；可按岗位 JD 用 AI 定制经历描述。",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs9IJjZRgptDrkPGK8BJkLF7r55kIxBQCwiGM3I5I8iVduFWRf+I44GBsKQJYh8CSjkIZ3wgL9C5NOhcnt+AYS42lJ44S+uxGwCZVp32fP2oqJNn15OjlwbAqLTpXZLk9vH40aK0qiZqzFLM+xODcMboP5joEd2oxoq3WsDC06dzNYH5pkMz0ZEXGhOAoSZ6QkGDxfqKNySUNN80R0aw2Zw2/nKQaM1aMzDNR5an6y6mna46mkxtINgFUPPgS+kEZQCmUlTDvlx3laVt1gJWZzMO6ml5XGMbWuRqpVJmfQkKouLxE40CS5RMgdorCrw5Tdrb2Vg/OPM9N4yuwiQSfIwIDAQAB",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "秋招简历助手",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "fill": {
+      "suggested_key": {
+        "default": "Alt+Shift+F",
+        "mac": "Alt+Shift+F"
+      },
+      "description": "一键填写当前页面"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/lib/text.js",
+        "src/lib/store.js",
+        "src/lib/files.js",
+        "src/content/rules.js",
+        "src/content/resolve.js",
+        "src/content/dom.js",
+        "src/content/widgets.js",
+        "src/content/memory.js",
+        "src/content/panel.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

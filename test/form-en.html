@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mock application form (test only)</title>
+    <style>
+      body { font: 14px/1.6 system-ui, sans-serif; max-width: 640px; margin: 20px auto; }
+      .field { display: flex; flex-direction: column; margin-bottom: 10px; }
+      input, select, textarea { padding: 6px 8px; font: inherit; }
+      section { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin: 12px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Campus Application</h1>
+    <section>
+      <h2>Personal Information</h2>
+      <div class="field"><label for="first">First Name *</label><input id="first" required /></div>
+      <div class="field"><label for="last">Last Name *</label><input id="last" required /></div>
+      <div class="field"><label for="email">Email Address *</label><input id="email" type="email" required /></div>
+      <div class="field"><label for="phone">Phone Number</label><input id="phone" type="tel" /></div>
+      <div class="field"><label for="gender">Gender</label><select id="gender"><option value="">Select...</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
+    </section>
+    <section>
+      <h2>Education</h2>
+      <div class="field"><label for="school">School</label><input id="school" /></div>
+      <div class="field"><label for="degree">Degree</label><select id="degree"><option value="">Select...</option><option>Bachelor's</option><option>Master's</option><option>PhD</option></select></div>
+      <div class="field"><label for="major">Field of Study</label><input id="major" /></div>
+      <div class="field"><label for="start">Start Date</label><input id="start" type="month" /></div>
+      <div class="field"><label for="end">End Date</label><input id="end" type="month" /></div>
+    </section>
+    <section>
+      <h2>Work Experience</h2>
+      <div class="field"><label for="company">Company</label><input id="company" /></div>
+      <div class="field"><label for="title">Job Title</label><input id="title" /></div>
+      <div class="field"><label for="desc">Description</label><textarea id="desc"></textarea></div>
+    </section>
+    <section>
+      <h2>Attachments</h2>
+      <div class="field"><label for="cv">Resume/CV</label><input id="cv" type="file" /></div>
+    </section>
+    <script>
+      window.snapshot = () => Object.fromEntries([...document.querySelectorAll('[id]')].filter((e) => 'value' in e).map((e) => [e.id, e.type === 'file' ? [...e.files].map((f) => f.name).join(',') : e.tagName === 'SELECT' ? (e.value ? e.selectedOptions[0].textContent : '') : e.value]));
+    </script>
+  </body>
+</html>

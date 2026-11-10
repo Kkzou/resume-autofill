@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+body { margin: 0; width: 300px; padding: 14px; font: 13px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; color: #1f2937; background: #fff; }
+header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+header img { width: 34px; height: 34px; }
+header b { display: block; font-size: 15px; }
+header small { color: #6b7280; }
+button { display: block; width: 100%; padding: 9px 10px; margin-bottom: 8px; border-radius: 9px; border: 1px solid #d1d5db; background: #fff; color: #1f2937; font: inherit; cursor: pointer; }
+button:hover { background: #f9fafb; }
+button.primary { background: #2563eb; border-color: #2563eb; color: #fff; font-weight: 600; font-size: 14px; }
+button.primary:hover { background: #1d4ed8; }
+button:disabled { opacity: .55; cursor: default; }
+#status { min-height: 20px; margin: 4px 0 8px; color: #374151; }
+#status.err { color: #b91c1c; }
+#status b.ok { color: #059669; } #status b.todo { color: #d97706; } #status b.diff { color: #dc2626; }
+.toggle { display: flex; align-items: center; gap: 6px; color: #4b5563; margin-bottom: 10px; cursor: pointer; }
+footer { display: flex; justify-content: space-between; border-top: 1px solid #f3f4f6; padding-top: 9px; font-size: 12px; color: #9ca3af; }
+footer a { color: #2563eb; text-decoration: none; }
+.job { border-top: 1px solid #f3f4f6; padding-top: 9px; margin-bottom: 4px; }
+.job label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+.job select { width: 100%; padding: 6px 8px; margin-bottom: 8px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; background: #fff; }
